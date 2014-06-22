@@ -8,13 +8,17 @@
 
 #import "LoginViewController.h"
 #import "FeedViewController.h"
+#import "MessagesViewController.h"
+#import "RequestsViewController.h"
+#import "NotificationsViewController.h"
+#import "MoreViewController.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UIView *loginContainerView;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
 @property (weak, nonatomic) IBOutlet UILabel *signUpLabel;
-@property (nonatomic, assign) BOOL isKeyboardShown;
+@property (nonatomic, assign) BOOL *isKeyboardShown;
 
 - (IBAction)onEmailTextfield:(id)sender;
 - (IBAction)onPasswordTextfield:(id)sender;
@@ -53,7 +57,8 @@
 
 - (IBAction)onEmailTextfield:(id)sender {
     
-    if (self.isKeyboardShown == YES) {
+    if (self.isKeyboardShown == NO) {
+        self.isKeyboardShown = YES;
         
         [UIView animateWithDuration:.3 animations:^{
             self.loginContainerView.frame = CGRectMake(self.loginContainerView.frame.origin.x, self.loginContainerView.frame.origin.y - TEXTFIELD_OFFSET, self.loginContainerView.frame.size.width, self.loginContainerView.frame.size.height);
@@ -67,7 +72,8 @@
 - (IBAction)onPasswordTextfield:(id)sender {
     NSLog(@"tapped on password");
     
-    if (self.isKeyboardShown == YES) {
+    if (self.isKeyboardShown == NO) {
+        self.isKeyboardShown = YES;
         
         [UIView animateWithDuration:.3 animations:^{
             self.loginContainerView.frame = CGRectMake(self.loginContainerView.frame.origin.x, self.loginContainerView.frame.origin.y - TEXTFIELD_OFFSET, self.loginContainerView.frame.size.width, self.loginContainerView.frame.size.height);
@@ -78,19 +84,50 @@
 }
 
 - (IBAction)onOutsideTextfield:(id)sender {
-    [UIView animateWithDuration:.3 animations:^{
-        self.loginContainerView.frame = CGRectMake(self.loginContainerView.frame.origin.x, self.loginContainerView.frame.origin.y + TEXTFIELD_OFFSET, self.loginContainerView.frame.size.width, self.loginContainerView.frame.size.height);
-         self.signUpLabel.frame = CGRectMake(self.signUpLabel.frame.origin.x, self.signUpLabel.frame.origin.y + SIGNUP_OFFSET, self.signUpLabel.frame.size.width, self.signUpLabel.frame.size.height);
-    }];
     
+    if (self.isKeyboardShown == YES) {
+        [UIView animateWithDuration:.3 animations:^{
+            self.loginContainerView.frame = CGRectMake(self.loginContainerView.frame.origin.x, self.loginContainerView.frame.origin.y + TEXTFIELD_OFFSET, self.loginContainerView.frame.size.width, self.loginContainerView.frame.size.height);
+            self.signUpLabel.frame = CGRectMake(self.signUpLabel.frame.origin.x, self.signUpLabel.frame.origin.y + SIGNUP_OFFSET, self.signUpLabel.frame.size.width, self.signUpLabel.frame.size.height);
+        }];
+}
     [self.view endEditing:YES];
-    
 }
 
 - (IBAction)onLogInButton:(id)sender {
     
-    if ([self.emailTextfield.text isEqual:@"user"]) {
-        NSLog(@"typed user");
+    if ([self.emailTextfield.text isEqual:@"user"] + [self.passwordTextfield.text isEqual:@"password"]) {
+        NSLog(@"verified");
+        
+        // Call this method after the user types the right username/password
+            UITabBarController *tabBarController = [[UITabBarController alloc] init];
+            
+            // create your various view controllers
+            FeedViewController *firstViewController = [[FeedViewController alloc] init];
+            RequestsViewController *secondViewController = [[RequestsViewController alloc] init];
+            MessagesViewController *thirdViewController = [[MessagesViewController alloc] init];
+            NotificationsViewController *fourthViewController = [[NotificationsViewController alloc] init];
+            MoreViewController *fifthViewController = [[MoreViewController alloc] init];
+            
+            tabBarController.viewControllers = @[firstViewController, secondViewController, thirdViewController, fourthViewController, fifthViewController];
+            
+            [self presentViewController:tabBarController animated:YES completion:nil];
+            
+            // Configure the titles and images of the tab bar items
+            firstViewController.tabBarItem.title = @"News Feed";
+            firstViewController.tabBarItem.image = [UIImage imageNamed:@"newsfeed"];
+            
+            secondViewController.tabBarItem.title = @"Requests";
+            secondViewController.tabBarItem.image = [UIImage imageNamed:@"requests"];
+            
+            thirdViewController.tabBarItem.title = @"Messages";
+            thirdViewController.tabBarItem.image = [UIImage imageNamed:@"messages"];
+        
+            fourthViewController.tabBarItem.title = @"Notifications";
+            fourthViewController.tabBarItem.image = [UIImage imageNamed:@"notifications"];
+        
+            fifthViewController.tabBarItem.title = @"More";
+            fifthViewController.tabBarItem.image = [UIImage imageNamed:@"more"];
     }
     
     else {
@@ -105,4 +142,7 @@
     
     
 }
+
+
+
 @end

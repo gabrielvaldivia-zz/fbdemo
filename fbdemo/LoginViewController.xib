@@ -34,7 +34,7 @@
                             <rect key="frame" x="30" y="86" width="268" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             <connections>
                                 <action selector="onEmailTextfield:" destination="-1" eventType="editingDidBegin" id="FOC-n2-slG"/>
                             </connections>
@@ -43,7 +43,7 @@
                             <rect key="frame" x="30" y="129" width="268" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             <connections>
                                 <action selector="onPasswordTextfield:" destination="-1" eventType="editingDidBegin" id="wEa-eE-Ln5"/>
                             </connections>
