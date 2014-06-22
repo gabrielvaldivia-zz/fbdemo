@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
                 <outlet property="emailTextfield" destination="0a8-gW-bOX" id="eHa-kX-5sS"/>
+                <outlet property="loginButton" destination="IHv-P4-2FQ" id="oRq-IM-uVQ"/>
                 <outlet property="loginContainerView" destination="TaX-rA-aOu" id="COg-HK-7ay"/>
                 <outlet property="passwordTextfield" destination="tet-Rx-VPM" id="tiw-Fj-Mc7"/>
                 <outlet property="signUpLabel" destination="pt8-eF-NLG" id="v5Y-wf-fuc"/>
@@ -36,6 +37,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             <connections>
+                                <action selector="editEmailTextfield:" destination="-1" eventType="editingChanged" id="Zod-X7-x00"/>
                                 <action selector="onEmailTextfield:" destination="-1" eventType="editingDidBegin" id="FOC-n2-slG"/>
                             </connections>
                         </textField>
@@ -48,16 +50,13 @@
                                 <action selector="onPasswordTextfield:" destination="-1" eventType="editingDidBegin" id="wEa-eE-Ln5"/>
                             </connections>
                         </textField>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_button_disabled" id="2no-fK-hyr">
-                            <rect key="frame" x="20" y="174" width="289" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IHv-P4-2FQ">
-                            <rect key="frame" x="20" y="175" width="289" height="44"/>
+                            <rect key="frame" x="20" y="174" width="289" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal">
+                            <state key="normal" backgroundImage="login_button_disabled">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" backgroundImage="logging_in_button"/>
                             <connections>
                                 <action selector="onLogInButton:" destination="-1" eventType="touchUpInside" id="tUL-0h-dwm"/>
                             </connections>
@@ -112,6 +111,7 @@
     </objects>
     <resources>
         <image name="form_bg" width="295" height="95"/>
+        <image name="logging_in_button" width="293" height="52"/>
         <image name="login_button_disabled" width="293" height="52"/>
         <image name="logo" width="174" height="43"/>
     </resources>
