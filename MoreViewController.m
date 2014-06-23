@@ -7,8 +7,11 @@
 //
 
 #import "MoreViewController.h"
+#import "LoginViewController.h"
 
 @interface MoreViewController ()
+@property (weak, nonatomic) IBOutlet UIScrollView *bookmarksScrollView;
+- (IBAction)onLogOut:(id)sender;
 
 @end
 
@@ -26,7 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.bookmarksScrollView.contentSize = CGSizeMake(320, 1800);
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,5 +48,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)onLogOut:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Are you sure you want to log out?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Log Out" otherButtonTitles:nil, nil];
+    [actionSheet showInView:self.view];
+    
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        NSLog(@"tapped Log Out");
+        UIViewController *vc = [[LoginViewController alloc] init];
+        vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+}
 
 @end

@@ -9,6 +9,7 @@
 #import "FeedViewController.h"
 
 @interface FeedViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *fbStory;
 
 @end
 
@@ -26,7 +27,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.fbStory.alpha = 0;
+    [self performSelector:@selector(loadFbStory) withObject:nil afterDelay:2];
     
+}
+
+-(void)loadFbStory {
+    [UIView animateWithDuration:.3 animations:^{
+        self.fbStory.alpha = 1;
+    }];
 }
 
 - (void)didReceiveMemoryWarning
